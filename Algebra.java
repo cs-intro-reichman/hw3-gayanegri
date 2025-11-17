@@ -36,13 +36,18 @@ public class Algebra {
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
 		int sum = x1;
-		for (int t = 0; t < x2; t++) {
+		if (x2 >= 0) {
+			for (int t = 0; t < x2; t++) {
 			sum--;
+		    }
+		} else {
+			for (int t = 0; t > x2; t--) {
+			sum++;
 		}
 		// Replace the following statement with your code
-		return sum;
 	}
-
+	    return sum;
+	}
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
 		int sum = 0;

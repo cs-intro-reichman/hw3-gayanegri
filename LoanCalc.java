@@ -28,8 +28,12 @@ public class LoanCalc {
 	// Computes the ending balance of a loan, given the loan amount, the periodical
 	// interest rate (as a percentage), the number of periods (n), and the periodical payment.
 	private static double endBalance(double loan, double rate, int n, double payment) {	
+		double endBalance = loan;
+		for (int t = 0; t < n; t++) {
+		endBalance = (endBalance - payment) * (1 + (rate / 100));	
+		}
 		// Replace the following statement with your code
-		return 0;
+		return endBalance;
 	}
 	
 	// Uses sequential search to compute an approximation of the periodical payment
@@ -38,8 +42,13 @@ public class LoanCalc {
 	// the number of periods (n), and epsilon, the approximation's accuracy
 	// Side effect: modifies the class variable iterationCounter.
     public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {
+		double x = (loan / n);
+		iterationCounter = 0;
+		for (x = (loan / n); endBalance(loan, rate, n, x) > 0; x += epsilon){
+			iterationCounter++;
+		}
 		// Replace the following statement with your code
-		return 0;
+		return x;
     }
     
     // Uses bisection search to compute an approximation of the periodical payment 
@@ -47,8 +56,21 @@ public class LoanCalc {
 	// Given: the sum of the loan, the periodical interest rate (as a percentage),
 	// the number of periods (n), and epsilon, the approximation's accuracy
 	// Side effect: modifies the class variable iterationCounter.
-    public static double bisectionSolver(double loan, double rate, int n, double epsilon) {  
+    public static double bisectionSolver(double loan, double rate, int n, double epsilon) {
+		iterationCounter = 0;
+		double l = (loan / n);
+		double h = (loan);
+		double g = (l + h) / 2;
+		while (h - l > epsilon) {
+			if ((endBalance(loan, rate, n, g) * endBalance(loan, rate, n, l)) > 0) {
+				l = g;
+			} else {
+				h = g;
+			}
+			g = (l + h) / 2;
+			iterationCounter++;
+		}
         // Replace the following statement with your code
-		return 0;
+		return g;
     }
 }

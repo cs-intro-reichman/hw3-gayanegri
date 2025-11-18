@@ -26,10 +26,15 @@ public class Algebra {
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
 		int sum = x1;
-		for (int t = 0; t < x2; t++) {
-			sum++;
-		}
-		// Replace the following statement with your code
+		if (x2 >= 0) {
+		    for (int t = 0; t < x2; t++) {
+			sum++;	
+		    }
+	    } else {
+			for (int t = 0; t > x2; t--) {
+			sum--;
+		    }
+	    }// Replace the following statement with your code
 		return sum;
 	}
 
@@ -51,8 +56,14 @@ public class Algebra {
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
 		int sum = 0;
-		for (int t = 0; t < x2; t++){
-		sum = plus(sum, x1);	
+		if (x2 >= 0) {
+		    for (int t = 0; t < x2; t++){
+		        sum = plus(sum, x1);	
+		    }
+	        } else {
+				for (int t = 0; t > x2; t--){
+		        sum = minus(sum, x1);
+			}
 		}
 		// Replace the following statement with your code
 		return sum;
@@ -61,20 +72,36 @@ public class Algebra {
 	// Returns x^n (for n >= 0)
 	public static int pow(int x, int n) {
 		int sum = 1;
-		for (int t = 0; t < n; t++) {
-			sum = times(sum, x);
-		}
+		    for (int t = 0; t < n; t++) {
+			    sum = times(sum, x);
+		    }
 		// Replace the following statement with your code
 		return sum;
 	}
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
-		int y = 1;
-		for (y = 1; times(x2, y) <= x1; y++){
+		int sing1 = x1;
+		int sing2 = x2;
+		if (x1 < 0) { 
+			x1 = minus(0, x1);
 		}
+		if (x2 < 0) {
+			x2 = minus(0, x2);
+		} 
+			int y = 1;
+		    for (y = 1; times(x2, y) <= x1; y++){
+		    } 
+		    y = minus(y, 1);
+
+			if (sing1 < 0 && sing2 > 0 || sing1 > 0 && sing2 < 0) {
+			    y = minus(0, y);	
+			} 
+        
+
+
 		// Replace the following statement with your code
-		return minus(y, 1);
+		return y;
 	}
 
 	// Returns x1 % x2
